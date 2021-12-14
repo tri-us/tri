@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import About from './about';
+import About from '../pages/about';
 
 describe('About', () => {
   it('should render successfully', () => {
