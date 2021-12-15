@@ -8,11 +8,14 @@
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx", "_*.tsx"],
+      "parserOptions": {
+        "project": ["apps/company-site/tsconfig*.json"]
+      },
       "rules": {
         "@next/next/no-html-link-for-pages": [
           "error",
-          "apps/company-site/pages"
+          "apps/company-site/src/pages"
         ]
       }
     },
