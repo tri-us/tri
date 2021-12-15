@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "company-site": "apps/company-site",
-    "company-site-e2e": "apps/company-site-e2e"
+    "company-site-e2e": "apps/company-site-e2e",
+    "utils": "libs/utils"
   }
 }
