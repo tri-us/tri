@@ -9,7 +9,9 @@ const Index: FC = () => {
           <h1 className="text-4xl">
             Hello, it&apos;s <strong className="text-primary-blue">Tri</strong>
           </h1>
-          <h2>We are building the site as we speek...</h2>
+          <h2 className="font-medium">
+            We are building the site as we speek...
+          </h2>
         </div>
       </section>
       <section className="flex flex-col justify-start items-center h-[50vh]">
