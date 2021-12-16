@@ -12,10 +12,10 @@ function check_is_affected {
 
   if [ $IS_AFFECTED -eq 1 ]; then
     echo "✅ $APP is affected"
-    exit 0
+    exit 1
   else
     echo "❌ $APP is not affected"
-    exit 1
+    exit 0
   fi
 }
 
