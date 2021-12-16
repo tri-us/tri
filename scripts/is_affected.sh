@@ -8,7 +8,7 @@ function check_is_affected {
 
   npm i -D @nrwl/workspace@$NX_VERSION typescript@$TS_VERSION --prefer-offline
 
-  IS_AFFECTED=$(npx nx affected:apps --plain --base HEAD~1 --head HEAD | grep $APP -q | wc -l)
+  IS_AFFECTED=$(npx nx affected:apps --plain --base HEAD~1 --head HEAD | grep $APP | wc -l)
 
   if [ $IS_AFFECTED -eq 1 ]; then
     echo "✅ $APP is affected"
