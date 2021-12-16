@@ -1,12 +1,14 @@
-/* eslint-disable-next-line @typescript-eslint/no-empty-interface */
-export interface AboutProps {}
+import { FC } from "react";
 
-export function About(props: AboutProps) {
+const About: FC = () => {
   return (
-    <div>
-      <h1>Welcome to About!</h1>
+    <div className="text-center dark:text-white text-3xl flex flex-col justify-center items-center h-screen space-y-10">
+      <h1 className="text-4xl font-medium">Welcome to About!</h1>
+      <p>
+        Founder: <strong className="text-primary-blue">Petar Vujović</strong>
+      </p>
     </div>
   );
-}
+};
 
 export default About;
