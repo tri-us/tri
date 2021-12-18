@@ -5,6 +5,7 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "extends": ["plugin:import/recommended"],
       "rules": {
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
@@ -18,12 +19,20 @@
               }
             ]
           }
-        ]
+        ],
+        "import/order": ["error", { "newlines-between": "always" }]
       }
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
+      "extends": ["plugin:@nrwl/nx/typescript", "plugin:import/typescript"],
+      "settings": {
+        "import/resolver": {
+          "typescript": {
+            "alwaysTryTypes": true
+          }
+        }
+      },
       "rules": {}
     },
     {
