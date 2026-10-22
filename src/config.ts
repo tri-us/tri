@@ -57,7 +57,7 @@ export const HERO: Hero = {
   headline:
     "We build the Rust and TypeScript services, indexers and docs behind NEAR apps and web2 products.",
   subhead:
-    "Tri is two engineers and a technical writer. We take on a small number of fixed-scope engagements, and every one ships with documentation your team can run from.",
+    "Tri is two engineers and a technical writer, led by the tech lead behind Termina, a Solana replay and simulation platform. We take on a small number of fixed-scope engagements, and every one ships with documentation your team can run from.",
   primary: { label: "Book an intro call", url: SITE.bookingUrl },
   secondary: { label: "How we work", url: "#how-we-work" },
 };
@@ -131,7 +131,7 @@ export const TEAM: TeamMember[] = [
     name: "Petar Vujović",
     url: "https://www.petarvujovic.com",
     background:
-      "Founding engineer at Nitro Labs, previously Taiko and NEAR Protocol. Designs and reviews everything Tri ships.",
+      "Founding engineer and tech lead at Nitro Labs, where he builds Termina, a platform for replaying and simulating Solana's history. Previously Taiko and NEAR Protocol. Designs and reviews everything Tri ships.",
   },
   {
     role: "Engineer",
