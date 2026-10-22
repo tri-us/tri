@@ -1,6 +1,9 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
+import "@fontsource-variable/space-grotesk";
+import "@fontsource/space-mono/400.css";
+import "@fontsource/space-mono/700.css";
 import "../styles/global.css";
 import { SITE } from "@config";
 
@@ -36,6 +39,17 @@ const organisation = {
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!-- Apply a saved theme choice before first paint. Without one, the
+     theme follows the system (see src/styles/global.css). -->
+<script is:inline>
+  try {
+    const theme = localStorage.getItem("theme");
+    if (theme === "light" || theme === "dark") {
+      document.documentElement.dataset.theme = theme;
+    }
+  } catch {}
+</script>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

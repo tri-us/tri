@@ -1,0 +1,20 @@
+---
+import SectionHeading from "@components/SectionHeading.astro";
+
+// A full-width band with the page's centred content column inside.
+interface Props {
+  id?: string;
+  index?: number;
+  title?: string;
+  class?: string;
+}
+
+const { id, index, title, class: className } = Astro.props;
+---
+
+<section id={id} class:list={["relative isolate", className]}>
+  <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+    {index && title && <SectionHeading index={index} title={title} />}
+    <slot />
+  </div>
+</section>

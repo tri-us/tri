@@ -10,28 +10,135 @@ const NAV = [
 ---
 
 <header
-  class="max-w-screen-lg w-full mx-auto px-4 pt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between"
+  class="sticky top-0 z-10 border-b border-line bg-bg/80 backdrop-blur supports-[backdrop-filter]:bg-bg/70"
 >
-  <a href="/" class="flex items-center gap-3 font-semibold no-underline">
-    <img
-      src="/logo.svg"
-      alt=""
-      width="48"
-      height="48"
-      class="w-12 h-12 dark:bg-sky-50 dark:rounded-full dark:p-1"
-    />
-    {SITE.name}
-  </a>
+  <div
+    class="max-w-screen-xl mx-auto px-4 md:px-8 py-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+  >
+    <a
+      href="/"
+      class="flex items-center gap-3 text-fg font-semibold text-lg no-underline"
+    >
+      <!-- The logo, inlined so its black follows the text colour in dark mode.
+           Paths are copied from public/logo.svg. -->
+      <svg
+        viewBox="540 50 306 400"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        focusable="false"
+        class="w-9 h-auto"
+      >
+        <path
+          class="fill-mark"
+          d="M 592.73 310.063 L 623.14 279.703 C 622.19 278.843 621.26 277.963 620.35 277.063 C 601.22 258.233 589.36 232.043 589.39 203.083 C 589.44 145.833 635.89 99.453 693.14 99.503 C 750.39 99.553 796.77 146.003 796.72 203.253 C 796.7 233.173 784 260.123 763.71 279.033 C 763.42 279.303 763.14 279.563 762.85 279.833 L 793.21 310.243 C 793.73 309.763 794.24 309.273 794.75 308.783 C 822.41 282.143 839.64 244.733 839.67 203.293 C 839.74 122.323 774.15 56.633 693.18 56.563 C 612.21 56.493 546.52 122.083 546.45 203.053 C 546.41 245.243 564.21 283.293 592.73 310.063"
+        ></path>
+        <path
+          fill="currentColor"
+          d="M 654.26 196.093 C 646.76 174.653 658.06 151.193 679.5 143.693 C 700.94 136.193 724.4 147.493 731.9 168.933 C 739.4 190.373 728.1 213.833 706.66 221.333 C 685.22 228.833 661.76 217.533 654.26 196.093"
+        ></path>
+        <rect
+          class="fill-mark"
+          x="605.08"
+          y="314.263"
+          width="175.89"
+          height="43.97"></rect>
+        <polygon
+          fill="currentColor"
+          points="604.88 371.883 671.35 371.883 671.35 389.353 649.05 389.353 649.05 442.643 627.18 442.643 627.18 389.353 604.88 389.353"
+        ></polygon>
+        <path
+          fill="currentColor"
+          d="M 703.5 400.553 L 712.72 400.553 C 713.72 400.553 715.65 400.233 718.51 399.593 C 719.96 399.303 721.14 398.563 722.06 397.373 C 722.98 396.183 723.44 394.813 723.44 393.273 C 723.44 390.993 722.72 389.233 721.27 388.013 C 719.82 386.793 717.1 386.183 713.11 386.183 L 703.5 386.183 L 703.5 400.553 Z M 681.54 442.643 L 681.54 371.883 L 717.98 371.883 C 724.74 371.883 729.9 372.463 733.47 373.623 C 737.04 374.783 739.92 376.933 742.11 380.063 C 744.3 383.203 745.39 387.023 745.39 391.523 C 745.39 395.453 744.55 398.833 742.88 401.683 C 741.21 404.533 738.9 406.843 735.97 408.613 C 734.1 409.743 731.54 410.673 728.29 411.413 C 730.9 412.283 732.79 413.153 733.98 414.023 C 734.78 414.603 735.95 415.843 737.48 417.743 C 739.01 419.643 740.03 421.113 740.54 422.143 L 751.13 442.643 L 726.42 442.643 L 714.73 421.013 C 713.25 418.213 711.93 416.393 710.77 415.563 C 709.19 414.473 707.41 413.923 705.41 413.923 L 703.5 413.923 L 703.5 442.643 L 681.54 442.643 Z"
+        ></path>
+        <rect
+          fill="currentColor"
+          x="759.01"
+          y="371.883"
+          width="21.92"
+          height="70.76"></rect>
+      </svg>
+      <span class="sr-only">{SITE.name}</span>
+    </a>
 
-  <nav aria-label="Sections">
-    <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-      {
-        NAV.map(({ label, url }) => (
-          <li>
-            <a href={url}>{label}</a>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
+    <div class="flex items-center justify-between gap-6">
+      <nav aria-label="Sections">
+        <ul
+          class="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-widest"
+        >
+          {
+            NAV.map(({ label, url }) => (
+              <li>
+                <a href={url} class="text-muted no-underline hover:text-fg">
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <button
+        type="button"
+        id="theme-toggle"
+        aria-label="Dark theme"
+        aria-pressed="false"
+        class="shrink-0 grid place-items-center w-9 h-9 rounded-md border border-line text-muted hover:text-fg hover:border-accent/50 transition-colors motion-reduce:transition-none"
+      >
+        <!-- Sun, shown in dark mode -->
+        <svg
+          class="theme-sun w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4"></circle>
+          <path
+            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+          ></path>
+        </svg>
+        <!-- Moon, shown in light mode -->
+        <svg
+          class="theme-moon w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
 </header>
+
+<script>
+  const root = document.documentElement;
+  const button = document.getElementById("theme-toggle")!;
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+  const isDark = () =>
+    root.dataset.theme ? root.dataset.theme === "dark" : systemDark.matches;
+
+  // Which icon shows is handled in CSS, so it is right before this runs.
+  const render = () => {
+    button.setAttribute("aria-pressed", String(isDark()));
+  };
+
+  button.addEventListener("click", () => {
+    const theme = isDark() ? "light" : "dark";
+    root.dataset.theme = theme;
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {}
+    render();
+  });
+
+  systemDark.addEventListener("change", render);
+  render();
+</script>

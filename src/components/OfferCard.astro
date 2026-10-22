@@ -12,17 +12,21 @@ const {
 } = Astro.props;
 ---
 
-<article
-  class="flex flex-col gap-4 p-6 rounded-lg border border-sky-300 dark:border-sky-800"
->
-  <h3 class="text-xl font-semibold">{name}</h3>
-  <p>
-    <span class="block text-2xl font-semibold tabular-nums">{price}</span>
-    <span class="text-sm">{duration}</span>
+<article class="card flex flex-col gap-5 p-6 md:p-8">
+  <h3 class="text-xl md:text-2xl font-semibold tracking-tight">{name}</h3>
+  <p class="flex flex-col gap-1">
+    <span class="font-mono text-2xl font-bold tabular-nums text-price"
+      >{price}</span
+    >
+    <span class="font-mono text-xs uppercase tracking-wider text-muted"
+      >{duration}</span
+    >
   </p>
   <p>{whoFor}</p>
-  <ul class="list-disc pl-5 flex flex-col gap-1 grow">
+  <ul class="marked-list flex flex-col gap-2 grow text-[15px]">
     {deliverables.map((deliverable) => <li>{deliverable}</li>)}
   </ul>
-  <p><a href={cta.url}>{cta.label}</a></p>
+  <p class="pt-4 border-t border-line">
+    <a href={cta.url} class="font-semibold">{cta.label} →</a>
+  </p>
 </article>

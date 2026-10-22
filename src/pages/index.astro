@@ -1,58 +1,94 @@
 ---
 import { HERO, HOW_WE_WORK, OFFERS, SITE, TEAM } from "@config";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import InfraGraph from "@components/InfraGraph.astro";
 import OfferCard from "@components/OfferCard.astro";
+import Section from "@components/Section.astro";
+
+const [headlineStart, headlineEnd] = HERO.headline.split(HERO.highlight);
 
 const offerCta = { label: "Book an intro call", url: SITE.bookingUrl };
 ---
 
 <BaseLayout title={SITE.title} description={SITE.description}>
-  <section class="flex flex-col gap-6 pt-16 pb-12 max-w-3xl">
-    <h1 class="text-4xl md:text-5xl font-bold leading-tight">
-      {HERO.headline}
-    </h1>
-    <p class="text-lg md:text-xl max-w-prose">{HERO.subhead}</p>
-    <div class="flex flex-wrap items-center gap-6">
-      <a
-        href={HERO.primary.url}
-        class="no-underline px-5 py-3 rounded-md font-semibold bg-sky-800 text-sky-50 hover:bg-sky-900 dark:bg-sky-300 dark:text-sky-950 dark:hover:bg-sky-200"
+  <Section class="theme-deep overflow-hidden pt-20 pb-24 md:pt-28 md:pb-32">
+    <div class="bg-grid absolute inset-0 -z-10" aria-hidden="true"></div>
+    <!-- On large screens the diagram shares the headline's grid row and is
+         centred on it, overflowing into the empty space above and below. -->
+    <div
+      class="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1fr)_26rem] xl:grid-cols-[minmax(0,1fr)_30rem] lg:gap-x-12 lg:gap-y-8"
+    >
+      <p
+        class="lg:col-start-1 flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-muted"
       >
-        {HERO.primary.label}
-      </a>
-      <a href={HERO.secondary.url}>{HERO.secondary.label}</a>
+        <span class="bar" aria-hidden="true"></span>
+        Rust · TypeScript · Docs
+      </p>
+      <h1
+        class="lg:col-start-1 lg:row-start-2 max-w-3xl text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-balance"
+      >
+        {headlineStart}<span class="text-mark">{HERO.highlight}</span>{
+          headlineEnd
+        }
+      </h1>
+      <div class="hidden lg:block relative lg:col-start-2 lg:row-start-2">
+        <div class="absolute inset-x-0 top-1/2 -translate-y-1/2">
+          <InfraGraph />
+        </div>
+      </div>
+      <p class="lg:col-start-1 text-lg md:text-xl text-muted max-w-prose">{HERO.subhead}</p>
+      <div class="lg:col-start-1 flex flex-wrap items-center gap-6">
+        <a href={HERO.primary.url} class="button">
+          {HERO.primary.label}
+        </a>
+        <a href={HERO.secondary.url} class="font-semibold">
+          {HERO.secondary.label} →
+        </a>
+      </div>
     </div>
-  </section>
+  </Section>
 
-  <section id="services" class="py-12">
-    <h2 class="text-2xl font-semibold mb-6">Services</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <Section id="services" index={1} title="Services" class="bg-band py-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {OFFERS.map((offer) => <OfferCard offer={offer} cta={offerCta} />)}
     </div>
-  </section>
+  </Section>
 
-  <section id="how-we-work" class="py-12">
-    <h2 class="text-2xl font-semibold mb-6">How we work</h2>
-    <div class="flex flex-col gap-4 max-w-prose">
-      {HOW_WE_WORK.map((paragraph) => <p>{paragraph}</p>)}
-    </div>
-  </section>
+  <Section id="how-we-work" index={2} title="How we work" class="py-20">
+    <ol class="max-w-3xl">
+      {
+        HOW_WE_WORK.map((paragraph, i) => (
+          <li class="grid grid-cols-[3.5rem_1fr] gap-4 py-6 border-t border-line first:border-t-0 first:pt-0">
+            <span class="font-mono text-2xl font-bold text-accent leading-none pt-1">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <p class="text-lg">{paragraph}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
 
-  <section id="team" class="py-12">
-    <h2 class="text-2xl font-semibold mb-6">Team</h2>
+  <Section id="team" index={3} title="Team" class="bg-band py-20">
     <ul class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {
         TEAM.map(({ role, name, url, background }) => (
-          <li class="flex flex-col gap-2 py-4 border-t border-sky-300 dark:border-sky-800">
-            <h3 class="text-lg font-semibold">
-              {name && url ? <a href={url}>{name}</a> : name}
-              <span class:list={["block", name && "text-base font-normal"]}>
+          <li class="flex flex-col gap-3 p-6 rounded-lg border-2 border-card-border bg-surface">
+            <h3 class="flex flex-col gap-2">
+              <span class="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted">
+                <span class="w-1.5 h-1.5 bg-mark" aria-hidden="true" />
                 {role}
               </span>
+              {name && (
+                <span class="text-xl font-semibold tracking-tight">
+                  {url ? <a href={url}>{name}</a> : name}
+                </span>
+              )}
             </h3>
             <p>{background}</p>
           </li>
         ))
       }
     </ul>
-  </section>
+  </Section>
 </BaseLayout>

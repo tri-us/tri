@@ -18,6 +18,8 @@ export interface Site {
 
 export interface Hero {
   headline: string;
+  // A substring of the headline to set in the brand colour.
+  highlight: string;
   subhead: string;
   primary: Link;
   secondary: Link;
@@ -56,6 +58,7 @@ export const SITE: Site = {
 export const HERO: Hero = {
   headline:
     "We build the Rust and TypeScript services, indexers and docs behind NEAR apps and web2 products.",
+  highlight: "services, indexers and docs",
   subhead:
     "Tri is two engineers and a technical writer, led by the tech lead behind Termina, a Solana replay and simulation platform. We take on a small number of fixed-scope engagements, and every one ships with documentation your team can run from.",
   primary: { label: "Book an intro call", url: SITE.bookingUrl },

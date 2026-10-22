@@ -1,0 +1,116 @@
+---
+import ArcMark from "@components/ArcMark.astro";
+
+// The logo as the hub of a small infrastructure diagram: chain RPCs feed in
+// on the left, storage and outputs leave on the right. Decorative only.
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const NODE_W = 112;
+const NODE_H = 32;
+
+// Node positions and the elbow path between each node and the hub's ring
+// (centre 260,260, radius 170). Paths run in the direction data flows, which
+// is the way the dashes travel.
+const NODES = [
+  { label: "near-rpc", x: 0, y: 40, path: "M112 56 H140 V140" },
+  { label: "solana-rpc", x: 0, y: 448, path: "M112 464 H140 V380" },
+  { label: "indexer", x: 204, y: 0, path: "M260 32 V90" },
+  { label: "postgres", x: 408, y: 40, path: "M380 140 V56 H408" },
+  { label: "api", x: 408, y: 448, path: "M380 380 V464 H408" },
+  { label: "sdk · docs", x: 204, y: 488, path: "M260 430 V488" },
+];
+
+const JUNCTIONS = [
+  [140, 140],
+  [140, 380],
+  [260, 90],
+  [380, 140],
+  [380, 380],
+  [260, 430],
+];
+---
+
+<div class:list={["relative aspect-square", className]} aria-hidden="true">
+  <svg
+    viewBox="-2 -2 524 524"
+    xmlns="http://www.w3.org/2000/svg"
+    focusable="false"
+    class="absolute inset-0 w-full h-full overflow-visible"
+  >
+    <circle
+      cx="260"
+      cy="260"
+      r="170"
+      fill="none"
+      class="stroke-line"
+      stroke-width="1.5"
+      stroke-dasharray="2 6"></circle>
+
+    {
+      NODES.map(({ path }) => (
+        <path
+          d={path}
+          fill="none"
+          class="infra-edge stroke-mark/70"
+          stroke-width="1.5"
+          stroke-dasharray="5 5"
+        />
+      ))
+    }
+
+    {
+      JUNCTIONS.map(([cx, cy]) => (
+        <circle cx={cx} cy={cy} r="4" class="fill-mark" />
+      ))
+    }
+
+    {
+      NODES.map(({ label, x, y }) => (
+        <g>
+          <rect
+            x={x}
+            y={y}
+            width={NODE_W}
+            height={NODE_H}
+            rx="4"
+            class="fill-surface stroke-line"
+            stroke-width="1.5"
+          />
+          <circle cx={x + 14} cy={y + NODE_H / 2} r="3" class="fill-mark" />
+          <text
+            x={x + 26}
+            y={y + NODE_H / 2}
+            dominant-baseline="central"
+            class="fill-muted font-mono text-[12px]"
+          >
+            {label}
+          </text>
+        </g>
+      ))
+    }
+  </svg>
+
+  <ArcMark class="absolute left-[29%] top-[28%] w-[42%]" />
+</div>
+
+<style>
+  .infra-edge {
+    animation: infra-flow 1.2s linear infinite;
+  }
+
+  @keyframes infra-flow {
+    to {
+      stroke-dashoffset: -10;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .infra-edge {
+      animation: none;
+    }
+  }
+</style>

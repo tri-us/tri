@@ -1,7 +1,149 @@
-a {
-  @apply text-sky-800 underline underline-offset-4 decoration-sky-800/40 hover:decoration-sky-800 dark:text-sky-300 dark:decoration-sky-300/40 dark:hover:decoration-sky-300;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Semantic colour tokens as RGB channels, consumed by tailwind.config.mjs. */
+:root {
+  --bg: 243 246 248; /* paper */
+  --band: 226 243 249; /* cyan tint, alternating sections */
+  --surface: 255 255 255;
+  --fg: 10 14 19; /* ink-950 */
+  --muted: 51 62 72; /* ink-700 */
+  --line: 180 192 202; /* ink-300 */
+  --card-border: 10 14 19; /* ink-950 */
+  --accent: 24 112 140; /* cyan-700 */
+  --mark: 88 201 232; /* cyan-400, the logo's blue */
+  --price: 161 85 9; /* signal-700 */
+  --button-bg: 10 14 19; /* ink-950 */
+  --button-fg: 246 248 250; /* ink-50 */
+  --selection: 170 229 245; /* cyan-200 */
+  color-scheme: light;
 }
 
-a:focus-visible {
-  @apply outline outline-2 outline-offset-4 rounded-sm outline-sky-800 dark:outline-sky-300;
+/* Dark follows the system unless the theme toggle has picked one
+   (data-theme on <html>, set in BaseHead.astro). Keep both blocks in sync. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: 8 22 29; /* petrol-950 */
+    --band: 11 30 39; /* petrol-900 */
+    --surface: 14 37 47; /* petrol-850 */
+    --fg: 240 247 250;
+    --muted: 159 184 195;
+    --line: 31 61 74; /* petrol-700 */
+    --card-border: 43 85 102; /* petrol-600 */
+    --accent: 127 216 239; /* cyan-300 */
+    --price: 251 191 78; /* signal-300 */
+    --button-bg: 88 201 232; /* cyan-400 */
+    --button-fg: 10 14 19; /* ink-950 */
+    --selection: 22 75 93; /* cyan-900 */
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: 8 22 29; /* petrol-950 */
+  --band: 11 30 39; /* petrol-900 */
+  --surface: 14 37 47; /* petrol-850 */
+  --fg: 240 247 250;
+  --muted: 159 184 195;
+  --line: 31 61 74; /* petrol-700 */
+  --card-border: 43 85 102; /* petrol-600 */
+  --accent: 127 216 239; /* cyan-300 */
+  --price: 251 191 78; /* signal-300 */
+  --button-bg: 88 201 232; /* cyan-400 */
+  --button-fg: 10 14 19; /* ink-950 */
+  --selection: 22 75 93; /* cyan-900 */
+  color-scheme: dark;
+}
+
+/* The brand's deep petrol (cyan-950), used for the hero and footer in both
+   themes. Redefines the tokens so children use the usual classes. */
+.theme-deep {
+  --bg: 11 47 60; /* cyan-950 */
+  --surface: 17 64 80;
+  --fg: 240 247 250;
+  --muted: 170 208 220;
+  --line: 30 85 104;
+  --accent: 127 216 239; /* cyan-300 */
+  --button-bg: 88 201 232; /* cyan-400 */
+  --button-fg: 10 14 19; /* ink-950 */
+  --selection: 22 75 93; /* cyan-900 */
+  color-scheme: dark;
+  @apply bg-bg text-fg;
+}
+
+/* Theme toggle icons: moon in light mode, sun in dark mode. */
+.theme-sun {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-sun {
+    display: block;
+  }
+
+  :root:not([data-theme="light"]) .theme-moon {
+    display: none;
+  }
+}
+
+:root[data-theme="dark"] .theme-sun {
+  display: block;
+}
+
+:root[data-theme="dark"] .theme-moon {
+  display: none;
+}
+
+@layer base {
+  html {
+    @apply bg-bg text-fg font-sans antialiased scroll-pt-24;
+  }
+
+  ::selection {
+    @apply bg-selection text-fg;
+  }
+
+  a {
+    @apply text-accent underline underline-offset-4 decoration-accent/40 hover:decoration-accent;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-4 rounded-sm outline-accent;
+  }
+}
+
+@layer components {
+  /* The logo's bar, used as a section prefix and card edge. */
+  .bar {
+    @apply block h-1 w-8 bg-mark;
+  }
+
+  /* Square bullets in the logo's blue. */
+  .marked-list > li {
+    @apply relative pl-5;
+  }
+
+  .marked-list > li::before {
+    content: "";
+    @apply absolute left-0 top-[0.6em] w-1.5 h-1.5 bg-mark;
+  }
+
+  /* Outlined card with a solid offset shadow in the logo's blue. */
+  .card {
+    @apply rounded-lg border-2 border-card-border bg-surface shadow-[5px_5px_0_0] shadow-mark;
+  }
+
+  .button {
+    @apply inline-flex items-center gap-2 px-5 py-3 rounded-md font-semibold no-underline bg-button-bg text-button-fg transition-colors motion-reduce:transition-none hover:bg-button-bg/85;
+  }
+
+  /* Blueprint grid, faded out towards the edges. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(var(--fg) / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--fg) / 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse at 30% 40%, black 30%, transparent 75%);
+  }
 }
