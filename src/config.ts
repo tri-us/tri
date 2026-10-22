@@ -43,7 +43,7 @@ export const SITE: Site = {
   legalName: "Tri d.o.o.",
   title: "Tri — Rust & TypeScript services, indexers and docs",
   description:
-    "Tri builds Rust and TypeScript services, indexers, SDKs and the docs that ship with them, for NEAR teams, Solana application-layer protocols and web2 products.",
+    "Tri builds and reviews Rust and TypeScript services, indexers, data pipelines and SDKs, with docs included, for NEAR and Solana teams and web2 products.",
   ogImageAlt:
     "Tri: we build the Rust and TypeScript services, indexers and docs behind NEAR apps and web2 products.",
   email: "contact@trius.me",
@@ -63,6 +63,19 @@ export const HERO: Hero = {
 };
 
 export const OFFERS: Offer[] = [
+  {
+    name: "Data infrastructure review",
+    price: "$12,000",
+    duration: "Fixed price · 1–2 weeks",
+    whoFor:
+      "NEAR and Solana teams whose indexers or data ingest pipelines are too slow, too expensive or keep breaking.",
+    deliverables: [
+      "A measured baseline of throughput, latency, cost and failure modes",
+      "A written report ranking fixes by impact and effort",
+      "Benchmarks and a reproduction harness you keep",
+      "Fee credited against a sprint or retainer signed within 30 days",
+    ],
+  },
   {
     name: "Integration and service sprint",
     price: "From $18,000",
@@ -131,4 +144,4 @@ export const TEAM: TeamMember[] = [
 ];
 
 export const SCOPE_NOTE =
-  "We work with NEAR teams, Solana application-layer protocols and web2 companies. We don't take on work that overlaps our team members' employers.";
+  "We work with NEAR and Solana teams and web2 companies. We don't take on work that overlaps our team members' employers.";

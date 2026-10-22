@@ -25,7 +25,7 @@ const offerCta = { label: "Book an intro call", url: SITE.bookingUrl };
 
   <section id="services" class="py-12">
     <h2 class="text-2xl font-semibold mb-6">Services</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {OFFERS.map((offer) => <OfferCard offer={offer} cta={offerCta} />)}
     </div>
   </section>
