@@ -1,3 +1,9 @@
+# Single-package repo. `packages` is required by older pnpm versions
+# whenever this file exists.
+packages:
+  - "."
+
+# Dependencies allowed to run install scripts (pnpm 10+).
 allowBuilds:
-  esbuild: set this to true or false
-  sharp: set this to true or false
+  esbuild: true
+  sharp: true
