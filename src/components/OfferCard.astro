@@ -1,0 +1,28 @@
+---
+import type { Offer } from "@config";
+
+interface Props {
+  offer: Offer;
+  cta: { label: string; url: string };
+}
+
+const {
+  offer: { name, price, duration, whoFor, deliverables },
+  cta,
+} = Astro.props;
+---
+
+<article
+  class="flex flex-col gap-4 p-6 rounded-lg border border-sky-300 dark:border-sky-800"
+>
+  <h3 class="text-xl font-semibold">{name}</h3>
+  <p>
+    <span class="block text-2xl font-semibold tabular-nums">{price}</span>
+    <span class="text-sm">{duration}</span>
+  </p>
+  <p>{whoFor}</p>
+  <ul class="list-disc pl-5 flex flex-col gap-1 grow">
+    {deliverables.map((deliverable) => <li>{deliverable}</li>)}
+  </ul>
+  <p><a href={cta.url}>{cta.label}</a></p>
+</article>

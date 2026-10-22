@@ -1,0 +1,37 @@
+---
+import { SITE } from "@config";
+
+const NAV = [
+  { label: "Services", url: "#services" },
+  { label: "How we work", url: "#how-we-work" },
+  { label: "Team", url: "#team" },
+  { label: "Contact", url: "#contact" },
+];
+---
+
+<header
+  class="max-w-screen-lg w-full mx-auto px-4 pt-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between"
+>
+  <a href="/" class="flex items-center gap-3 font-semibold no-underline">
+    <img
+      src="/logo.svg"
+      alt=""
+      width="48"
+      height="48"
+      class="w-12 h-12 dark:bg-sky-50 dark:rounded-full dark:p-1"
+    />
+    {SITE.name}
+  </a>
+
+  <nav aria-label="Sections">
+    <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+      {
+        NAV.map(({ label, url }) => (
+          <li>
+            <a href={url}>{label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
